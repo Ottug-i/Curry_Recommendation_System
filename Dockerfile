@@ -2,9 +2,15 @@ FROM python:3.7.2
 
 RUN git clone "https://github.com/Ottug-i/Curry_Recommendation_System.git"
 
-WORKDIR /flask
+WORKDIR /Curry_Recommendation_System
+
+RUN pip install --upgrade pip setuptools wheel
 
 RUN pip install -r requirements.txt
+
+RUN mv flask/app.py .
+RUN mv flask/csv .
+RUN mv flask/py .
 
 ENV FLASK_APP app.py
 
