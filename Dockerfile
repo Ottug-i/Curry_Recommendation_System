@@ -1,7 +1,5 @@
 FROM python:3.7.2
 
-RUN git clone "https://github.com/Ottug-i/Curry_Recommendation_System.git"
-
 WORKDIR /Curry_Recommendation_System
 
 RUN pip install --upgrade pip setuptools wheel
