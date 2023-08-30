@@ -2,9 +2,7 @@ name: Flask Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "deploy" ]
 
 jobs:
   build:
