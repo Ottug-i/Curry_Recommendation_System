@@ -2,13 +2,13 @@ FROM python:3.7.2
 
 WORKDIR /Curry_Recommendation_System
 
+COPY flask/app.py .
+COPY flask/csv ./csv
+COPY flask/py ./py
+COPY requirements.txt .
+
 RUN pip install --upgrade pip setuptools wheel
-
 RUN pip install -r requirements.txt
-
-RUN mv flask/app.py .
-RUN mv flask/csv .
-RUN mv flask/py .
 
 ENV FLASK_APP app.py
 
