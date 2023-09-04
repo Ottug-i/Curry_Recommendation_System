@@ -4,21 +4,39 @@ on:
   push:
     branches: [ "deploy" ]
 
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  DOCKER_IMAGE_NAME: flask
+  GCE_INSTANCE: ${{ secrets.GCE_INSTANCE }}
+  GCE_INSTANCE_ZONE: ${{ secrets.GCE_INSTANCE_ZONE}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
+    - name: Setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+          service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true
+      run: |-
+          gcloud --quiet auth configure-docker
     
     - name: Flask Docker Image Build
-      run: docker build . --file Dockerfile --tag kimgagyeong/curry:flask
+      run: |-
+          docker build . --file Dockerfile --tag "gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME:$GITHUB_SHA"
 
-    - name: Docker Login
-      uses: docker/login-action@v2
-      with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Flask Docker Image Push
+      run: |-
+          docker push "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA"
 
-    - name: Docker Hub Push
-      run: docker push kimgagyeong/curry:flask
+    - name: Deploy to Google Compute Engine
+      run: |-
+          gcloud compute instances update-container "$GCE_INSTANCE" \
+            --zone "$GCE_INSTANCE_ZONE" \
+            --container-image "gcr.io/$PROJECT_ID/$GCE_INSTANCE-image:$GITHUB_SHA" \
+            --container-ports "5000:5000"
