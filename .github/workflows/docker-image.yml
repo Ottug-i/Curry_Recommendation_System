@@ -28,7 +28,7 @@ jobs:
     
     - name: Flask Docker Image Build
       run: |-
-          docker build . --file Dockerfile --tag "gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME:latest
+          docker build . --file Dockerfile --tag "gcr.io/$PROJECT_ID/$DOCKER_IMAGE_NAME:latest"
 
     - name: Flask Docker Image Push
       run: |-
