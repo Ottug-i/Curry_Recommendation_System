@@ -39,11 +39,9 @@ def recommend_with_ratings(user_id, favorite_genre, page):
 
             user_profile = user_ratings[user_ratings['user_id'] == user_id]
 
-            X_train, X_test, y_train, y_test = train_test_split(user_profile[curry_genres.columns], user_profile['rating'], random_state=42, test_size=0.1)
-
             lasso = Lasso(alpha=0.005)
 
-            lasso.fit(X_train, y_train)
+            lasso.fit(user_profile[curry_genres.columns], user_profile['rating'])
 
             predictions = lasso.predict(curry_genres)
             curry_genres['predict'] = predictions
