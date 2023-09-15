@@ -10,6 +10,7 @@ COPY requirements.txt .
 
 RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
+RUN apt-get install libgl1-mesa-glx
 
 ENV FLASK_APP app.py
 
