@@ -7,3 +7,4 @@ image
 Pillow
 opencv-python-headless
 requests
+urllib3
