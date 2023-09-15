@@ -9,9 +9,9 @@ COPY flask/yolo ./yolo
 COPY requirements.txt .
 
 RUN pip install --upgrade pip setuptools wheel
-RUN apt-get update
-RUN apt-get install libgl1-mesa-glx
 RUN pip install -r requirements.txt
+RUN apt-get update -y
+RUN apt-get install -y libgl1-mesa-glx
 
 ENV FLASK_APP app.py
 
