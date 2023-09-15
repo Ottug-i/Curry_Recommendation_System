@@ -5,6 +5,7 @@ WORKDIR /Curry_Recommendation_System
 COPY flask/app.py .
 COPY flask/csv ./csv
 COPY flask/py ./py
+COPY flask/yolo ./yolo
 COPY requirements.txt .
 
 RUN pip install --upgrade pip setuptools wheel
