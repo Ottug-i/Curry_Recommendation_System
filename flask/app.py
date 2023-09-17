@@ -68,7 +68,7 @@ def get_bookmark_recommend():
         return json.dumps({"error": "Invalid parameters"}), 400
     try:
         # 추천 레시피 목록
-        result = recommend_with_bookmark(recipe_id, page)
+        result = recommend_with_bookmark(recipe_id, 0, page)
     except KeyError as e:
         return json.dumps({"error": "Recipe ID not found"}), 404
     
