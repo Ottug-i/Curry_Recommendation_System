@@ -27,21 +27,21 @@ def detect_ingredients():
             image = request.files['image']
             img = Image.open(image)
 
-            # 이미지 크기를 1960으로 조정
-            img = img.resize((1960, 1960))
+            # 이미지 크기를 1440으로 조정
+            img = img.resize((1440, 1440))
             img = np.array(img)
             original_width, original_height = img.shape[1], img.shape[0]
 
             # 객체 인식 수행
-            results = model(img, size=1960)
+            results = model(img, size=1440)
 
             # 객체 감지 결과를 원하는 형식으로 변환
             object_list = []
             for index, row in results.pandas().xyxy[0].iterrows():
-                xmin = float(row['xmin']) * original_width / 1960
-                ymin = float(row['ymin']) * original_height / 1960
-                xmax = float(row['xmax']) * original_width / 1960
-                ymax = float(row['ymax']) * original_height / 1960
+                xmin = float(row['xmin']) * original_width / 1440
+                ymin = float(row['ymin']) * original_height / 1440
+                xmax = float(row['xmax']) * original_width / 1440
+                ymax = float(row['ymax']) * original_height / 1440
                 confidence = float(row['confidence'])
                 class_index = int(row['class'])
 
