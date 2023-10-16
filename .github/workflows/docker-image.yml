@@ -2,7 +2,7 @@ name: Flask Docker Image CI/CD
 
 on:
   push:
-    branches: [ "deploy" ]
+    branches: [ "main" ]
 
 env:
   MYSQL_URL: ${{ secrets.MYSQL_URL }}
@@ -19,9 +19,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      with:
-        ref: deploy
-
+      
     - name: Setup gcloud CLI
       uses: google-github-actions/setup-gcloud@v0
       with:
