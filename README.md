@@ -21,6 +21,7 @@
 - 학습한 모델을 Flask에 탑재하여 API 작성
 - 사용자의 레시피 평점 정보를 기반으로 레시피 10개 추천
 - 북마크한 레시피와 비슷한 레시피 5개 추천<br><br>
+![API](https://github.com/Ottug-i/Curry_Recommendation_System/assets/87821678/e9e03a63-c18e-4cbc-b216-f93f24906fe9)
 ![모델 탑재1](https://github.com/Ottug-i/Curry_Recommendation_System/assets/87821678/4d7e565d-af1e-496f-8d6c-30f6a0c18501)
 ![모델 탑재2](https://github.com/Ottug-i/Curry_Recommendation_System/assets/87821678/401c405b-3f93-4465-b10a-d265f74521ab)
 <br><br>
